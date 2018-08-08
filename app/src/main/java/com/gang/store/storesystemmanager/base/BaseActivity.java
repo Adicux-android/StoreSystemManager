@@ -39,7 +39,7 @@ public abstract class BaseActivity<P extends BasePresenter, M extends BaseModel>
         presenter = TUtil.getT(this, 0);
         model = TUtil.getT(this, 1);
         this.initView();
-        if (this instanceof BaseView) presenter.initViewModel(this, model);
+        if (this instanceof BaseView) presenter.initViewModel(this, model,context);
     }
 
     @Override
@@ -82,7 +82,7 @@ public abstract class BaseActivity<P extends BasePresenter, M extends BaseModel>
         } else {
             super.setContentView(getContainer());
             View view = LayoutInflater.from(this).inflate(layoutResID, null);
-            view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+//            view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
             swipeBackLayout.addView(view);
         }
     }

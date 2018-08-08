@@ -1,6 +1,7 @@
 package com.gang.store.storesystemmanager.ui.stock;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -23,6 +24,7 @@ import com.gang.store.storesystemmanager.R;
 import com.gang.store.storesystemmanager.adapter.FragmentAdapter;
 import com.gang.store.storesystemmanager.base.BaseActivity;
 import com.gang.store.storesystemmanager.base.BaseFragment;
+import com.gang.store.storesystemmanager.ui.addorder.AddOrderActivity;
 import com.gang.store.storesystemmanager.utils.DialogUtils;
 
 import java.util.ArrayList;
@@ -133,7 +135,10 @@ public class StockActivity extends BaseActivity<StockPresenter, StockModel> impl
                         }
                     }
                 });
-
+                break;
+            case R.id.action_order:
+                Intent intent = new Intent(this, AddOrderActivity.class);
+                startActivity(intent);
                 break;
             default:
                 break;
@@ -184,12 +189,30 @@ public class StockActivity extends BaseActivity<StockPresenter, StockModel> impl
         String[] strings2 = str2.split("-");
         Log.d("wang","str1===" + strings1.length + "," + strings1.toString());
         Log.d("wang","str2===" + strings2.length + "," + strings2.toString());
+        for (String s:strings1) {
+            Log.d("wanggang","s====" + s.toString());
+        }
+        for (String s:strings2) {
+            Log.d("wanggang","s2====" + s.toString());
+        }
         if (Integer.valueOf(strings1[0]) > Integer.valueOf(strings2[0])) {
+            Log.d("gang","=============000");
             isBigger = true;
-        } else if ((Integer.valueOf(strings1[0]) == Integer.valueOf(strings2[0])) && (Integer.valueOf(strings1[1]) > Integer.valueOf(strings2[1]))) {
-            isBigger = true;
-        } else if ( ((Integer.valueOf(strings1[0]) == Integer.valueOf(strings2[0])) && (Integer.valueOf(strings1[1]) == Integer.valueOf(strings2[1])))&& (Integer.valueOf(strings1[2]) > Integer.valueOf(strings2[2]))) {
-            isBigger = true;
+        }
+        else{
+            if ((Integer.valueOf(strings1[1]) > Integer.valueOf(strings2[1]))) {
+                Log.d("gang","=============111");
+                isBigger = true;
+            }
+            else {
+                if ((Integer.valueOf(strings1[2]) > Integer.valueOf(strings2[2]))) {
+                    Log.d("gang","=============222");
+                    isBigger = true;
+                } else {
+                    Log.d("gang","=============333");
+                    isBigger = false;
+                }
+            }
         }
         return isBigger;
     }

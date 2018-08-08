@@ -8,15 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.gang.store.storesystemmanager.ui.fragment.NewsFragment;
 import com.gang.store.storesystemmanager.ui.fragment.PictureFragment;
+import com.gang.store.storesystemmanager.ui.fragment.orderlist.OrderListFragment;
+import com.gang.store.storesystemmanager.utils.TUtil;
 
 /**
  * Created by Administrator on 2018/6/21.
  */
 
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment<P extends BasePresenter, M extends BaseModel> extends Fragment {
 
+    public P presenter;
+    public M model;
     protected boolean bIsViewCreated;
     protected boolean bIsDataLoaded;
 
@@ -25,7 +28,7 @@ public abstract class BaseFragment extends Fragment {
         Bundle arguments = new Bundle();
         arguments.putString("type", type);
         if (type.contains("列表")) {
-            fragment = new NewsFragment();
+            fragment = new OrderListFragment();
         } else {
             fragment = new PictureFragment();
         }
@@ -38,6 +41,10 @@ public abstract class BaseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(getLayoutResId(), container, false);
         initView(view);
+        presenter = TUtil.getT(this, 0);
+        model = TUtil.getT(this, 1);
+        if (this instanceof BaseView) presenter.initViewModel(this, model,getContext());
+
         bIsViewCreated = true;
         if (getUserVisibleHint() && !bIsDataLoaded) {
             loadData();
@@ -60,6 +67,12 @@ public abstract class BaseFragment extends Fragment {
             loadData();
             bIsDataLoaded = true;
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (presenter != null) presenter.onDestroy();
     }
 
     protected abstract void loadData();

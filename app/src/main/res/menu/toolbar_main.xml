@@ -5,22 +5,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/action_order"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:title="添加订单"
+        android:icon="@mipmap/add_order"/>
+    <item
         android:id="@+id/action_search"
         android:orderInCategory="100"
         app:showAsAction="always"
         android:icon="@mipmap/toolbar_menu_serarch"
         android:title="筛选"/>
-    <!--<item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        app:showAsAction="always"
-        android:title="起始日期"
-        android:icon="@mipmap/setting"/>
-    <item
-        android:id="@+id/action_share"
-        android:orderInCategory="100"
-        app:showAsAction="always"
-        android:title="截止日期"
-        android:icon="@mipmap/setting"/>-->
+
+    <!--<item-->
+        <!--android:id="@+id/action_share"-->
+        <!--android:orderInCategory="100"-->
+        <!--app:showAsAction="always"-->
+        <!--android:title="截止日期"-->
+        <!--android:icon="@mipmap/setting"/>-->
 
 </menu>

@@ -13,9 +13,10 @@ public abstract class BasePresenter<M, V> {
     public V view;
 //    public RxManager rxManager = new RxManager();
 
-    public void initViewModel(V v, M m) {
+    public void initViewModel(V v, M m,Context context) {
         this.view = v;
         this.model = m;
+        this.context = context;
         this.onStart();
     }
 
